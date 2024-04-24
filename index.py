@@ -94,7 +94,7 @@ def update_selected_numbers(old_selected_numbers, new_selected_numbers):
     save_selected_numbers(old_selected_numbers)
 
 # При запуске программы загружаем данные из файлов
-grafiky_kategory = load_grafiky_file_kat()
+
 selected_numbers = load_selected_numbers()
 
 # Далее в коде мы будем использовать переменные grafiky_kategory и selected_numbers
@@ -318,22 +318,30 @@ bot = telebot.TeleBot(TOKEN)
 @bot.message_handler(commands=['start'])
 def start_com(message):
 	found = False
-	for i in admins_kategory:
-		if str(message.chat.id) in i:
+	for i in megaadmins:
+		if str(message.chat.id) in str(i):
 			found = True
 			break
 	if found == True:
 		adminin(message)
-	else:	
+	else:
 		found = False
-		for i in workers_kategory:
+		for i in admins_kategory:
 			if str(message.chat.id) in i:
 				found = True
 				break
 		if found == True:
-			workerin(message)
+			adminin(message)
 		else:	
-			bot.send_message(message.chat.id, ' У вас нету доступа в этот кабинет')	
+			found = False
+			for i in workers_kategory:
+				if str(message.chat.id) in i:
+					found = True
+					break
+			if found == True:
+				workerin(message)
+			else:	
+				bot.send_message(message.chat.id, ' У вас нету доступа в этот кабинет')	
 
 
 @bot.message_handler(commands=['megaadm'])
@@ -377,7 +385,7 @@ def mega_com(message):
 
 
 
-
+'''
 
 def send_dayotchet():
 	current_date = datetime.date.today()
@@ -419,7 +427,7 @@ schedule_t.start()
 #########################ЦИКЛИ№#########################
 
 
-
+'''
 
 
 
@@ -437,8 +445,16 @@ def lalala(message):
 				break
 		if found == True:
 			adminin_kasy(message)
-		else:	
-			bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
+		else:
+			found = False
+			for i in megaadmins:
+				if str(message.chat.id) in str(i):
+					found = True
+					break
+			if found == True:
+				adminin_kasy(message)
+			else:	
+				bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
 	if message.text == 'Сотрудники':
 		found = False
 		for i in admins_kategory:
@@ -447,8 +463,16 @@ def lalala(message):
 				break
 		if found == True:
 			adminin_workers(message)
-		else:	
-			bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
+		else:
+			found = False
+			for i in megaadmins:
+				if str(message.chat.id) in str(i):
+					found = True
+					break
+			if found == True:
+				adminin_workers(message)
+			else:	
+				bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
 	if message.text == 'Графики':
 		found = False
 		for i in admins_kategory:
@@ -457,8 +481,16 @@ def lalala(message):
 				break
 		if found == True:
 			adminin_grafiky(message)
-		else:	
-			bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
+		else:
+			found = False
+			for i in megaadmins:
+				if str(message.chat.id) in str(i):
+					found = True
+					break
+			if found == True:
+				adminin_grafiky(message)
+			else:	
+				bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
 	if message.text == 'Админы':
 		found = False
 		for i in admins_kategory:
@@ -467,8 +499,16 @@ def lalala(message):
 				break
 		if found == True:
 			adminin_admins(message)
-		else:	
-			bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
+		else:
+			found = False
+			for i in megaadmins:
+				if str(message.chat.id) in str(i):
+					found = True
+					break
+			if found == True:
+				adminin_admins(message)
+			else:	
+				bot.send_message(message.chat.id, 'У вас нету доступа в этот кабинет')
 
 
 
